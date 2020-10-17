@@ -15,9 +15,7 @@ class HashTable:
         currentElem = self.arr[hashKey]
         for index,elem in enumerate(currentElem):
             if (elem[0]==key):
-                list1 = list(elem)
-                list1[1]=value
-                currentElem[index]=tuple(list1)
+                currentElem[index]=(key,value)
                 isKeyExists=True
                 break
         if not isKeyExists:
@@ -33,20 +31,40 @@ class HashTable:
                 return elem[1]
         return
 
-h= HashTable()
-h.put("20",10)
-h.put("20",20)
-h.put("10",10)
-h.put("30",30)
-h.put("40",40)
-h.put("50",50)
-h.put("60",60)
-h.put("70",70)
-h.put("80",10)
-h.put("90",90)
-h.put("120",120)
-h.put("200",200)
-h.put("1000",10000)
-h.put("12783448u83u",50)
-h.put("21",21)
-print(h.get("1000"))
+    def remove(self,key):
+        hashKey = self.getHash(key)
+        bucket = self.arr[hashKey]
+        if(bucket is None):
+            return
+        if(self.get(key) is None):
+            return
+        bucket.remove((key,self.get(key)))
+
+    def length(self):
+        rows = len(self.arr)
+        total=0
+        for i in range( 0,rows,1 ):
+            total= total + len(self.arr[i])
+        return total
+
+# Test
+# h= HashTable()
+# h.put("20",10)
+# h.put("20",20)
+# h.put("10",10)
+# h.put("30",30)
+# h.put("40",40)
+# h.put("50",50)
+# h.put("60",60)
+# h.put("70",70)
+# h.put("80",10)
+# h.put("90",90)
+# h.put("120",120)
+# h.put("200",200)
+# h.put("1000",10000)
+# h.put("12783448u83u",50)
+# h.put("21",21)
+# print(h.length())
+# print(h.remove(20))
+# print(h.remove("20"))
+# print(h.arr)
