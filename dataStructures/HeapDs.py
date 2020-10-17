@@ -68,11 +68,6 @@ class Heap:
         del self.heap[size-1]
         self.heapify(func)
 
-    #Hashtable implementation
-    def advancedRemove(self,elem):
-        return
-
-
 
 # Test: here also passed function in Python inside a class in heapify
 # heap = Heap([9,8,7,6,5,4])
