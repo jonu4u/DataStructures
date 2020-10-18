@@ -1,3 +1,4 @@
+# Priority Q is a ADT which can also be implemented using Heap.So this same class can be called PQ as well
 class Heap:
     def __init__(self,items=[]):
         self.heap = items
