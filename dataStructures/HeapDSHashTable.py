@@ -106,6 +106,7 @@ class HeapHash:
 
     def fastRemove(self,elem,func):
         size =len(self.heap)
+        # For duplicate elements inside a heap we can remove anyone.Here I'm removing the first.
         indexOfElem = self.map.get(elem)[0]
         # When an element is removed from heap, the last element is assigned to the index of the removed position, so
         # our map needs to first remove both the last and the current element index and then add the new index of the current
