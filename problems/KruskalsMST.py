@@ -4,6 +4,7 @@ class Krushkal:
         self.graph=[]
         self.sorted_list=[]
         self.result=[]
+        self.is_node_visited=set()
 
 
     def add_edge(self,u,v,w):
@@ -21,9 +22,12 @@ class Krushkal:
         self.sort_graph_on_weight()
         graph = UnionFind_DisjointSet.Graph(self.sorted_list)
         for u,v,w in self.graph:
+            if u in self.is_node_visited and v in self.is_node_visited:
+                continue
+            self.is_node_visited.add(u)
+            self.is_node_visited.add(v)
             graph.union(u,v)
-            if (v,u,w) not in self.result:
-               self.result.append((u,v,w))
+            self.result.append((u,v,w))
             if(graph.findSize()==1):
                 break;
 
@@ -36,23 +40,23 @@ class Krushkal:
         return cost
 
 
-
-g = Krushkal()
-g.add_edge(0, 1, 4)
-g.add_edge(0, 2, 4)
-g.add_edge(1, 2, 2)
-g.add_edge(1, 0, 4)
-g.add_edge(2, 0, 4)
-g.add_edge(2, 1, 2)
-g.add_edge(2, 3, 3)
-g.add_edge(2, 5, 2)
-g.add_edge(2, 4, 4)
-g.add_edge(3, 2, 3)
-g.add_edge(3, 4, 3)
-g.add_edge(4, 2, 4)
-g.add_edge(4, 3, 3)
-g.add_edge(5, 2, 2)
-g.add_edge(5, 4, 3)
-
-print(g.krushkal_algo())
-print(g.cost())
+# # Test programwiz example
+# g = Krushkal()
+# g.add_edge(0, 1, 4)
+# g.add_edge(0, 2, 4)
+# g.add_edge(1, 2, 2)
+# g.add_edge(1, 0, 4)
+# g.add_edge(2, 0, 4)
+# g.add_edge(2, 1, 2)
+# g.add_edge(2, 3, 3)
+# g.add_edge(2, 5, 2)
+# g.add_edge(2, 4, 4)
+# g.add_edge(3, 2, 3)
+# g.add_edge(3, 4, 3)
+# g.add_edge(4, 2, 4)
+# g.add_edge(4, 3, 3)
+# g.add_edge(5, 2, 2)
+# g.add_edge(5, 4, 3)
+#
+# print(g.krushkal_algo())
+# print(g.cost())
