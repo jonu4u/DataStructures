@@ -39,18 +39,17 @@ class Graph:
         filtered = filter(cond,self.size)
         return len(list(filtered))
 
-
-
-
+   # Using Path Compression as each element points to root node
     def find(self,value):
         rootKey = None
         for elem in self.graph:
             rootKey=list(elem.keys())[0]
             if elem.get(rootKey)==value:
                 break
-        for elem in self.graph:
-            if rootKey == list(elem.keys())[0]:
-                return elem
+        # for elem in self.graph:
+        #     if rootKey == list(elem.keys())[0]:
+        #         return elem
+        return self.graph[rootKey]
 
 
 # graph=Graph([1,12,4,7,8])
