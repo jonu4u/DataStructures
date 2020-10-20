@@ -30,13 +30,13 @@ class Graph:
                     self.size[parentkey2]=None
 
 
-    def findSize(self):
-        def cond(letter):
+    def get_size(self):
+        def condition(letter):
             if letter is not None:
                 return True
             else:
                 return False
-        filtered = filter(cond,self.size)
+        filtered = filter(condition,self.size)
         return len(list(filtered))
 
    # Using Path Compression as each element points to root node

@@ -1,46 +1,72 @@
-from dataStructures import UnionFind_DisjointSet
-class Krushkal:
+class Graph:
     def __init__(self):
-        self.graph=[]
-        self.sorted_list=[]
+        self.parentMap={}
+        self.currentIndex=0
+        # This is needed for Kruskal not for union find
+        self.graph =[]
 
     def add_edge(self,u,v,w):
         self.graph.append((u,v,w))
+        is_u_present = False
+        is_v_present = False
+        for valueList in self.parentMap.values():
+            if u in valueList:
+                is_u_present=True
+            if v in valueList:
+                is_v_present=True
+        if not is_u_present:
+            self.add_vertex(u)
+        if not is_v_present:
+            self.add_vertex(v)
 
-    def sort_graph_on_weight(self):
-        self.graph=sorted(self.graph,key=lambda item:item[2])
-        for u,v,w in self.graph:
-            if u not in self.sorted_list:
-                self.sorted_list.append(u)
-            if v not in self.sorted_list:
-                self.sorted_list.append(v)
+    def add_vertex(self,vertex):
+        self.parentMap[self.currentIndex] = [vertex]
+        self.currentIndex+=1
 
-    def krushkal_algo(self):
+
+    def findParentKey(self,value):
+        for key,eachValueList in self.parentMap.items():
+            if value in eachValueList:
+                return key
+
+    def union(self,u,v):
+        parentkey1 = self.findParentKey(u)
+        parentkey2 = self.findParentKey(v)
+        if parentkey1==parentkey2:
+            return
+        size1 = len(self.parentMap.get(parentkey1))
+        size2 = len(self.parentMap.get(parentkey2))
+        if(size1>size2):
+            self.combine_groups(parentkey1,parentkey2)
+        else:
+            self.combine_groups(parentkey2,parentkey1)
+
+    # Make key1 as key of 2nd group
+    def combine_groups(self,key1,key2):
+        value2= self.parentMap.get(key2)
+        self.parentMap.get(key1).extend(value2)
+        self.parentMap.pop(key2)
+
+    def kruskal_algo(self):
         result=[]
-        is_node_visited=set()
-        self.sort_graph_on_weight()
-        graph = UnionFind_DisjointSet.Graph(self.sorted_list)
+        is_vertex_visited = []
+        self.graph= sorted(self.graph,key=lambda item:item[2])
         for u,v,w in self.graph:
-            if u in is_node_visited and v in is_node_visited:
+            if u in is_vertex_visited and v in is_vertex_visited:
                 continue
-            is_node_visited.add(u)
-            is_node_visited.add(v)
-            graph.union(u,v)
-            result.append((u,v,w))
-            if(graph.findSize()==1):
-                break;
-
+            is_vertex_visited.extend([u,v])
+            if len(self.parentMap)>1:
+                self.union(u,v)
+                result.append((u,v,w))
         return result
 
     def cost(self,result):
-        cost = 0
-        for elem in result:
-            cost=cost+elem[2]
+        cost=0
+        for u,v,w in result:
+            cost+=w
         return cost
-
-
-# Test programwiz example
-g = Krushkal()
+# 14
+g = Graph()
 g.add_edge(0, 1, 4)
 g.add_edge(0, 2, 4)
 g.add_edge(1, 2, 2)
@@ -56,6 +82,6 @@ g.add_edge(4, 2, 4)
 g.add_edge(4, 3, 3)
 g.add_edge(5, 2, 2)
 g.add_edge(5, 4, 3)
-result = g.krushkal_algo()
+result = g.kruskal_algo()
 print(result)
 print(g.cost(result))
