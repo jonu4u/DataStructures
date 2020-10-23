@@ -49,12 +49,12 @@ class Graph:
 
     def kruskal_algo(self):
         result=[]
-        is_vertex_visited = []
+        is_vertex_visited = set()
         self.graph= sorted(self.graph,key=lambda item:item[2])
         for u,v,w in self.graph:
             if u in is_vertex_visited and v in is_vertex_visited:
                 continue
-            is_vertex_visited.extend([u,v])
+            is_vertex_visited.update([u,v])
             if len(self.parentMap)>1:
                 self.union(u,v)
                 result.append((u,v,w))
