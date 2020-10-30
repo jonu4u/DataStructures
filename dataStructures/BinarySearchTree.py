@@ -64,10 +64,18 @@ class BST:
             print("Right parent is ",root.right.data)
             self.printTree(root.right)
 
+    # Inorder predessor
     def findLargestInLeftSubtee(self,head):
         currentValue = head.left
         while currentValue.right is not None:
             currentValue=currentValue.right
+        return currentValue
+
+    # Inorder successor
+    def find_smallest_in_rt_subtree(self,head):
+        currentValue=head.right
+        while currentValue.left is not None:
+            currentValue=currentValue.left
         return currentValue
 
     def remove(self,value):
