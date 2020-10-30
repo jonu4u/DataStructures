@@ -34,10 +34,6 @@ class Solution(object):
                 left+=1
         return max_len
 
-
-
-
-
 s=Solution()
 print(s.lengthOfLongestSubstring_brute("au"))
 print(s.lengthOfLongestSubstring_brute("bbbb"))
