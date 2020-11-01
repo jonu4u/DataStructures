@@ -45,3 +45,24 @@ class Solution(object):
         if current2 is not None:
             current.next=current2
         return new_list
+
+    # A question asked in google is to merge k sorted lists
+    # list contains a list of k sorted linked lists
+    # This will exceed time limit
+    def merge_k_sorted_lists_brute(self,list):
+        initial_list=None
+        for elem in list:
+            initial_list=self.mergeTwoLists(initial_list,elem)
+        return initial_list
+
+    # Learn divide and conquer to use it here
+    def merge_k_sorted_lists_smart(self,list):
+        size=len(list)
+        initial_list=list[0]
+        for index,elem in enumerate(list):
+            if index+1<size:
+               initial_list=self.mergeTwoLists(initial_list,list[index+1])
+        return initial_list
+
+
+
