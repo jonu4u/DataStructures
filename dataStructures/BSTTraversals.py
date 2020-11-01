@@ -1,5 +1,11 @@
 from dataStructures import BinarySearchTree
 from dataStructures import QueueDs
+class Node:
+    def __init__(self, key):
+        self.data = key
+        self.left = None
+        self.right = None
+
 class Traversals:
     def __init__(self):
         self.bfsq = QueueDs.Queue()
@@ -24,24 +30,23 @@ class Traversals:
         print(node.data)
 
 
-    def level_order_bfs(self, node, rightNode=None):
-         if node==None:return
-         left = node.left
-         right = node.right
-         self.bfsq.enqueue(node.data)
-         if rightNode:
-             self.bfsq.enqueue(rightNode.data)
-         if left is None and right is None:
-             return self.bfsq
-         if left and right:
-             self.level_order_bfs(left, right)
-             return self.bfsq
-         if left and right is None:
-             self.level_order_bfs(left, right)
-             return self.bfsq
-         else:
-             self.level_order_bfs(right, left)
-             return self.bfsq
+    def level_order_bfs(self, root):
+        height=self.height(root)
+        for i in range(1,height+1):
+            self.print_level(i)
+
+    def height(self,node):
+        if node is None:
+            return 0;
+        return max(self.height(node.left), self.height(node.right)) + 1
+
+    def print_level(self,lvl):
+        return
+
+
+
+
+
 
 
 
@@ -57,5 +62,6 @@ t.insertNode(15)
 t.insertNode(10)
 
 dfs = Traversals()
-print("Inorder-->",dfs.in_order_dfs(t.tree))
-print("BFS-->",dfs.level_order_bfs(t.tree).printQ())
+print(dfs.height(t.tree))
+# print("Inorder-->",dfs.in_order_dfs(t.tree))
+# print("BFS-->",dfs.level_order_bfs(t.tree).printQ())
