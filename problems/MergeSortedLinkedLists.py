@@ -58,11 +58,18 @@ class Solution(object):
     # Learn divide and conquer to use it here
     def merge_k_sorted_lists_smart(self,list):
         size=len(list)
-        initial_list=list[0]
-        for index,elem in enumerate(list):
-            if index+1<size:
-               initial_list=self.mergeTwoLists(initial_list,list[index+1])
-        return initial_list
+        if size<=2:
+            if size==2:
+                return self.mergeTwoLists(list[0],list[1])
+            else:
+                return list[0]
+        middle=size//2
+        l1=self.merge_k_sorted_lists_smart(list[:middle])
+        l2=self.merge_k_sorted_lists_smart(list[middle:])
+        return self.mergeTwoLists(l1,l2)
+
+
+
 
 
 
