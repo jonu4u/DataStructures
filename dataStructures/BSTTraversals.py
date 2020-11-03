@@ -1,5 +1,6 @@
 from dataStructures import BinarySearchTree
 from dataStructures import QueueDs
+from collections import deque
 class Node:
     def __init__(self, key):
         self.data = key
@@ -31,18 +32,69 @@ class Traversals:
 
 
     def level_order_bfs(self, root):
-        height=self.height(root)
-        for i in range(1,height+1):
-            self.print_level(i)
+        # Take a q
+        q=QueueDs.Queue()
+        # put the root in the q
+        q.enqueue(root)
+        # peek returns first element from q.So till q is not null
+        while q.peek() is not None:
+            element_peeked=q.peek()
+            print(element_peeked.dataVal.data)
+            # left=left of element peeked and right is right
+            left=element_peeked.dataVal.left
+            right=element_peeked.dataVal.right
+            # remove the peeked element
+            q.dequeue()
+            # if not none then put in q and loop
+            if left is not None:
+                q.enqueue(left)
+            if right is not None:
+                q.enqueue(right)
 
-    def height(self,node):
-        if node is None:
-            return 0;
-        return max(self.height(node.left), self.height(node.right)) + 1
+    def level_order_bfs_using_python_deque(self, root):
+        # Take a q
+        q=deque([root])
+        # peek returns first element from q.So till q is not null
+        while len(q)>0 and q[0] is not None:
+            element_peeked=q.popleft()
+            print(element_peeked.dataVal.data)
+            # left=left of element peeked and right is right
+            left=element_peeked.dataVal.left
+            right=element_peeked.dataVal.right
 
-    def print_level(self,lvl):
-        return
+            # if not none then put in q and loop
+            if left is not None:
+                q.append(left)
+            if right is not None:
+                q.append(right)
 
+
+
+    # Useful Code to find height of the tree
+    def height_tree(self, root):
+        if root is None:
+            return 0
+        return max(self.height(root.left), self.height(root.right)) + 1
+
+    # Useful Code to find node level in the tree
+    def height_of_node(self,root, data) :
+        return self.__getHeight__(root, data, 1)
+
+    def __getHeight__(self,root, node, level):
+        if (root == None):
+            return 0
+
+        if (root == node) :
+            return level
+
+        downlevel = self.__getHeight__(root.left,
+                                       node, level + 1)
+        if (downlevel != 0) :
+            return downlevel
+
+        downlevel = self.__getHeight__(root.right,
+                                       node, level + 1)
+        return downlevel
 
 
 
@@ -62,6 +114,6 @@ t.insertNode(15)
 t.insertNode(10)
 
 dfs = Traversals()
-print(dfs.height(t.tree))
+print(dfs.height_tree(t.tree))
 # print("Inorder-->",dfs.in_order_dfs(t.tree))
-# print("BFS-->",dfs.level_order_bfs(t.tree).printQ())
+print("BFS(Level Order)-->",dfs.level_order_bfs(t.tree))
