@@ -8,6 +8,7 @@ class Node:
         self.right = None
 
 class Traversals:
+
     def __init__(self):
         self.bfsq = QueueDs.Queue()
 
@@ -17,7 +18,7 @@ class Traversals:
          self.pre_order_dfs(node.left)
          self.pre_order_dfs(node.right)
 
-
+    list1=[]
     def in_order_dfs(self, node):
          if node==None: return
          self.in_order_dfs(node.left)
@@ -74,7 +75,7 @@ class Traversals:
     def height_tree(self, root):
         if root is None:
             return 0
-        return max(self.height(root.left), self.height(root.right)) + 1
+        return max(self.height_tree(root.left), self.height_tree(root.right)) + 1
 
     # Useful Code to find node level in the tree
     def height_of_node(self,root, data) :
@@ -96,12 +97,6 @@ class Traversals:
                                        node, level + 1)
         return downlevel
 
-
-
-
-
-
-
 t = BinarySearchTree.BST()
 t.insertNode(7)
 t.insertNode(5)
@@ -115,5 +110,5 @@ t.insertNode(10)
 
 dfs = Traversals()
 print(dfs.height_tree(t.tree))
-# print("Inorder-->",dfs.in_order_dfs(t.tree))
+print("Inorder-->",dfs.in_order_dfs(t.tree))
 print("BFS(Level Order)-->",dfs.level_order_bfs(t.tree))
