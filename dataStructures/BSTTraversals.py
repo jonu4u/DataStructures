@@ -18,12 +18,19 @@ class Traversals:
          self.pre_order_dfs(node.left)
          self.pre_order_dfs(node.right)
 
+<<<<<<< Updated upstream
     list1=[]
     def in_order_dfs(self, node):
+=======
+
+    def in_order_dfs(self, node,list1):
+>>>>>>> Stashed changes
          if node==None: return
-         self.in_order_dfs(node.left)
-         print(node.data)
-         self.in_order_dfs(node.right)
+         self.in_order_dfs(node.left,list1)
+         # print(node.data)
+         list1.append(node.data)
+         self.in_order_dfs(node.right,list1)
+         return list1
 
     def post_order(self,node):
         if node==None: return
@@ -110,5 +117,5 @@ t.insertNode(10)
 
 dfs = Traversals()
 print(dfs.height_tree(t.tree))
-print("Inorder-->",dfs.in_order_dfs(t.tree))
+print("Inorder-->",dfs.in_order_dfs(t.tree,[]))
 print("BFS(Level Order)-->",dfs.level_order_bfs(t.tree))
