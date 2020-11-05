@@ -18,13 +18,7 @@ class Traversals:
          self.pre_order_dfs(node.left)
          self.pre_order_dfs(node.right)
 
-<<<<<<< Updated upstream
-    list1=[]
-    def in_order_dfs(self, node):
-=======
-
     def in_order_dfs(self, node,list1):
->>>>>>> Stashed changes
          if node==None: return
          self.in_order_dfs(node.left,list1)
          # print(node.data)
