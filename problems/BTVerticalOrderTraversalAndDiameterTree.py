@@ -122,16 +122,18 @@ class Solution(object):
     def dia_tree(self,root):
         self.ans=1
         # depth of a node is a recursive function which is max of left height and right height
-        def depth(self,root):
+        def dfs(self,root):
             if not root:
                 return 0
-            left=self.depth(root.left)
-            right=self.depth(root.right)
+            left=self.dfs(root.left)
+            right=self.dfs(root.right)
             # while we calculate depth each node and it's left and right constitutes a path.
             #     So length of the path is depth of left+depth of right +1(for the node itself)
             self.ans=max(self.ans,left+right+1)
             # Recursion call for finding depth
             return max(left,right) +1
+        # Path is always total nodes -1
+        return self.ans -1
 
 
 
