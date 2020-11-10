@@ -41,3 +41,6 @@ class Solution:
 s=Solution()
 print(s.LCS_top_down("bacabab", "babacab", 7, 7))
 print(s.LCS_top_down("aacabdkacaa", "aacakdbacaa", 11, 11))
+
+print(s.LCS_RC("bacabab", "babacab", 7, 7,""))
+print(s.LCS_RC("aacabdkacaa", "aacakdbacaa", 11, 11,""))
