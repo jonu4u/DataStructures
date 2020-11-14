@@ -71,4 +71,4 @@ class Solution(object):
         if char_first==char_second:
             if len(word1)>len(word2):
                 return -1
-        return 0  
+        return 0
