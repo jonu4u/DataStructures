@@ -52,6 +52,7 @@ class Solution(object):
         # Intuitive is to do two loops
         if p==".*" or s==p:
             return True
+        orig=s[:]
         size_match=len(p)
         char_s=""
         for index,char in enumerate(p):
@@ -59,9 +60,9 @@ class Solution(object):
                 continue
             if len(s)>0:
                 char_s=s[0]
-            elif len(s)==0 and char==char_s and p[index-1]=="*":
+            elif len(s)==0 and char==char_s and p[index-1]=="*" and len(orig)>1:
                 continue
-            elif index+1<size_match and p[index+1]=="*":
+            elif len(s)==0 and index+1<size_match and p[index+1]=="*":
                 continue
             elif len(s)==0:
                 return False
@@ -90,6 +91,8 @@ print(s.isMatch("mississippi",  "mis*i*c*d*f*s*.p*."))
 print(s.isMatch("aaa", "aaaa"))
 print(s.isMatch("aaa","ab*a*c*a"))
 print(s.isMatch("a","ab*"))
+print(s.isMatch("a","ab*a"))
+print(s.isMatch("ab",".*.."))
 
 
 
