@@ -3,6 +3,7 @@ class Solution:
         self.ans=""
         # Max length given in constrainsts
         self.memoizize_top_down=[]
+        self.memoizize_rc=[["" for i in range(0, 1001)] for i in range(0, 1001)]
 
     # Recursion
     def LCS_RC(self, s1, s2, size1, size2, common):
@@ -17,6 +18,20 @@ class Solution:
         right=self.LCS_RC(s1, s2, size1, size2 - 1, "")
         max_string=max([c2,left,right],key=len)
         return max_string
+
+    # Recursion + Memoizize
+    def LCSubstring_RC_Memozize(self, s1, s2, size1, size2):
+        # Base Case
+        if size1==0 or size2==0:
+            return self.memoizize_rc[size1][size2]
+        if self.memoizize_rc[size1][size2]!="":
+            return self.memoizize_rc[size1][size2]
+        # Choice Diagram
+        if s1[size1-1]==s2[size2-1]:
+            self.memoizize_rc[size1][size2]= s1[size1-1] + self.LCSubstring_RC_Memozize(s1, s2, size1 - 1, size2 - 1)
+            return self.memoizize_rc[size1][size2]
+        # self.memoizize_rc[size1][size2]=""
+        return self.memoizize_rc[size1][size2]
 
     def LCS_top_down(self, s1, s2, size1, size2):
         # Base Case
@@ -40,7 +55,9 @@ class Solution:
 
 s=Solution()
 print(s.LCS_top_down("bacabab", "babacab", 7, 7))
+print(s.LCSubstring_RC_Memozize("bacabab", "babacab", 7, 7))
 print(s.LCS_top_down("aacabdkacaa", "aacakdbacaa", 11, 11))
 
 print(s.LCS_RC("bacabab", "babacab", 7, 7,""))
 print(s.LCS_RC("aacabdkacaa", "aacakdbacaa", 11, 11,""))
+print(s.LCSubstring_RC_Memozize("aacabdkacaa", "aacakdbacaa", 11, 11))
