@@ -17,21 +17,35 @@
 # 1 <= nums.length <= 10
 # -10 <= nums[i] <= 10
 class Solution(object):
+    # We take cascading approach. This means we add one char
+    # from nums and do all possible combinations of the elements
+    # in return map
+    def subsets_single_line(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        out=[[]]
+        for elem in nums:
+            out+=[curr +[elem] for curr in out]
+        return out
+
     def subsets(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
         out=[]
-        size=len(nums)
-        left=0
-        while left<size:
-            right=left+1
-            out.append([nums[left]])
-            while right<size:
-                out.append([nums[left],nums[right]])
-                right+=1
-            left+=1
+        for elem in nums:
+            list1=[]
+            for i in out:
+                list1.append(i+[elem])
+            out.extend(list1[:])
+            out.append([elem])
         out.append([])
-        out.append(nums)
         return out
+
+s=Solution()
+print(s.subsets_single_line([1,2,3]))
+print(s.subsets([1,2,3]))
+
