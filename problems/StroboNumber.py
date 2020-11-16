@@ -101,22 +101,23 @@ class Solution(object):
     # We have to write more effficient way of checking is_strob
     # Start from middle if it contains 6 then next must be 9.Then fan out and it should have either
     #     of symmetry numbers in between or outside
-    def is_strob_eff(self,num,symmetry_map,loop_ctr):
-        new=""
-        for index,elem in enumerate(num):
-            if elem not in symmetry_map:
-                # When any char is not in the map we jump 10**(len(num)-index-1)) numbers
-                # If the elem is 2 we can straightaway jump 2,3,4,5
-                if elem=="2":
-                    loop_ctr=loop_ctr+(10**(len(num)-index-1))*4
-                else:
-                    loop_ctr=loop_ctr+(10**(len(num)-index-1))
-                return (loop_ctr,False)
-            else:
-                new=symmetry_map[elem]+new
-        if new==num:
-            return (loop_ctr+1,True)
-        return (loop_ctr+1,False)
+    # Check this out https://leetcode.com/problems/strobogrammatic-number-ii/discuss/934855/python3-faster-than-100
+    # def is_strob_eff(self,num,symmetry_map,loop_ctr):
+    #     new=""
+    #     for index,elem in enumerate(num):
+    #         if elem not in symmetry_map:
+    #             # When any char is not in the map we jump 10**(len(num)-index-1)) numbers
+    #             # If the elem is 2 we can straightaway jump 2,3,4,5
+    #             if elem=="2":
+    #                 loop_ctr=loop_ctr+(10**(len(num)-index-1))*4
+    #             else:
+    #                 loop_ctr=loop_ctr+(10**(len(num)-index-1))
+    #             return (loop_ctr,False)
+    #         else:
+    #             new=symmetry_map[elem]+new
+    #     if new==num:
+    #         return (loop_ctr+1,True)
+    #     return (loop_ctr+1,False)
 
 
 s=Solution()
