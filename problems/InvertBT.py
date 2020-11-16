@@ -29,12 +29,12 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
-        return self.in_order(root)
+        return self.post_order(root)
 
-    def in_order(self,root):
+    def post_order(self, root):
         if not root:return
-        self.in_order(root.left)
-        self.in_order(root.right)
+        self.post_order(root.left)
+        self.post_order(root.right)
         return self.swap_child_of_node(root)
 
     def swap_child_of_node(self,node):
