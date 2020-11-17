@@ -56,10 +56,12 @@ class Solution(object):
         left_list=self.create_left_list(root,[])
         right_list=self.create_right_list(root,[])
         right_list.reverse()
-        leaf_list=self.pre_order(root,[])
+        leaf_list=self.create_leaf_list(root, [])
+        # Root + left + leaf+right
         final_list=[root.val]+left_list+leaf_list+right_list
         return final_list
 
+    # This is the list of right non leaf nodes
     def create_right_list(self,root,list1):
         current=root
         next_right=current.right
@@ -68,9 +70,11 @@ class Solution(object):
                 break
             list1.append(next_right.val)
             current=next_right
+            # If there is only one child node traverse in it
             next_right=current.right if current.right else current.left
         return list1
 
+    # This is the left non leaf nodes list
     def create_left_list(self,root,list1):
         current=root
         next_left=current.left
@@ -79,16 +83,18 @@ class Solution(object):
                 break
             list1.append(next_left.val)
             current=current.left
+            # If there is only one child node traverse in it
             next_left=current.left if current.left else current.right
         return list1
 
 
-    def pre_order(self,root,leaf_list):
+    # Find all leaf nodes by preorder traversal
+    def create_leaf_list(self, root, leaf_list):
         if not root:return
         if not root.left and not root.right:
             leaf_list.append(root.val)
-        self.pre_order(root.left,leaf_list)
-        self.pre_order(root.right,leaf_list)
+        self.create_leaf_list(root.left, leaf_list)
+        self.create_leaf_list(root.right, leaf_list)
         return leaf_list
 
 
