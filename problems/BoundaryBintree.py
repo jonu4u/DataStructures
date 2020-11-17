@@ -53,62 +53,43 @@ class Solution(object):
             return []
         if not root.left and not root.right:
             return [root.val]
-        non_leaf,leaf_list=self.pre_order(root,[],[],False,False,False,0)
-        # Find the non leaf leftmost node
-        current=root
-        next_left=current.left
-        while current and  next_left:
-            if not next_left.left or not next_left.right:
-                break
-            current=current.left
-            next_left=current.left if not current.left else current.right
-        index_of_last_left_non_leaf=non_leaf.index(current.val)
+        left_list=self.create_left_list(root,[])
         right_list=self.create_right_list(root,[])
         right_list.reverse()
-        final_list=non_leaf[:index_of_last_left_non_leaf+1]+leaf_list+right_list
+        leaf_list=self.pre_order(root,[])
+        final_list=[root.val]+left_list+leaf_list+right_list
         return final_list
 
     def create_right_list(self,root,list1):
         current=root
         next_right=current.right
         while current and next_right:
-            list1.append(next_right)
+            if not next_right.left and not next_right.right:
+                break
+            list1.append(next_right.val)
             current=next_right
             next_right=current.right if current.right else current.left
-        list1.append(next_right)
+        return list1
+
+    def create_left_list(self,root,list1):
+        current=root
+        next_left=current.left
+        while current and  next_left:
+            if not next_left.left and not next_left.right:
+                break
+            list1.append(next_left.val)
+            current=current.left
+            next_left=current.left if current.left else current.right
         return list1
 
 
-    def pre_order(self,root,list1,leaf_list,does_parent_binary,is_right_child,is_left_branch,ctr):
+    def pre_order(self,root,leaf_list):
         if not root:return
-        if self.is_valid_boundary_node(root,is_right_child,is_left_branch,does_parent_binary):
-            if not root.left and not root.right:
-                leaf_list.append(root.val)
-            else:
-                list1.append(root.val)
-        if root.left and root.right:
-            does_parent_binary=True
-        else:
-            does_parent_binary=False
-        if is_left_branch and ctr!=0:
-            is_left_branch=True
-        if ctr==0:
-            ctr+=1
-            self.pre_order(root.left,list1,leaf_list,does_parent_binary,False,True,ctr)
-            self.pre_order(root.right,list1,leaf_list,does_parent_binary,True,False,ctr)
-
-        else:
-            ctr+=1
-            self.pre_order(root.left,list1,leaf_list,does_parent_binary,False,is_left_branch,ctr)
-            self.pre_order(root.right,list1,leaf_list,does_parent_binary,True,is_left_branch,ctr)
-        return (list1,leaf_list)
-
-    def is_valid_boundary_node(self,node,is_right_child,is_left_branch,does_parent_binary):
-        if is_left_branch and is_right_child and (node.left or node.right) and does_parent_binary:
-            return False
-        elif not is_left_branch and not is_right_child and (node.left or node.right) and does_parent_binary:
-            return False
-        return True
+        if not root.left and not root.right:
+            leaf_list.append(root.val)
+        self.pre_order(root.left,leaf_list)
+        self.pre_order(root.right,leaf_list)
+        return leaf_list
 
 
 
