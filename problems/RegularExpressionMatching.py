@@ -41,7 +41,6 @@
 # s contains only lowercase English letters.
 # p contains only lowercase English letters, '.', and '*'.
 # It is guaranteed for each appearance of the character '*', there will be a previous valid character to match.
-from collections import OrderedDict
 class Solution(object):
     def isMatch(self, s, p):
         """
@@ -49,40 +48,31 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
-        # Intuitive is to do two loops
-        if p==".*" or s==p:
-            return True
-        orig=s[:]
-        size_match=len(p)
-        char_s=""
-        for index,char in enumerate(p):
-            if char=="*":
-                continue
-            if len(s)>0:
-                char_s=s[0]
-            elif len(s)==0 and char==char_s and p[index-1]=="*" and len(orig)>1:
-                continue
-            elif len(s)==0 and index+1<size_match and p[index+1]=="*":
-                continue
-            elif len(s)==0:
-                return False
-            if index+1<size_match and char!="." and p[index+1] != "*" and char_s!=char:
-                    return False
-            elif index+1<size_match and (char_s==char or char==".") and p[index+1] == "*":
-                for i in s:
-                    if i==char_s:
-                        s=s[1:]
+        memo = {}
+        # We start with 0th element of text and pattern
+        def dp(i, j):
+            if (i, j) not in memo:
+                # if both have length 0 ten True else False
+                if j == len(p):
+                    ans = (i==len(s))
+                else:
+                    # If the first charecter matches text in pattern or it is '.'
+                    # then it's a match
+                    first_match = i < len(s) and p[j] in {s[i], '.'}
+                    # If we have two chars and the 2nd char is '*'
+                    # it could be a match or we can ignore this
+                    if j+1 < len(p) and p[j+1] == '*':
+                              # This is when we ignore or
+                              # This is when we match both charecters
+                        ans = dp(i, j+2) \
+                              or first_match and dp(i+1, j)
                     else:
-                        break
-            elif char=="." or char_s==char:
-                s=s[1:]
-            elif index+1<size_match and p[index+1] == "*" and char_s!=char:
-                    continue
+                        ans = first_match and dp(i+1, j+1)
 
+                memo[i, j] = ans
+            return memo[i, j]
 
-        if len(s)==0:
-            return True
-        return False
+        return dp(0, 0)
 
 s=Solution()
 print(s.isMatch("mississippi",  "mis*is*p*."))
