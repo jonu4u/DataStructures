@@ -87,7 +87,7 @@ class Solution(object):
         return out_list
 
 
-        def bfs(self,root):
+    def bfs(self,root):
             q=deque()
             col_index=0
             q.append((root,col_index))

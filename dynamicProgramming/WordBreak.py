@@ -71,3 +71,4 @@ print(s.wordBreak(s = "applepenapple", wordDict = ["apple", "pen"]))
 print(s.wordBreak(s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]))
 print(s.wordBreak(s = "cars", wordDict = ["car", "ca", "rs"]))
 print(s.wordBreak(s = "aaaaaaa", wordDict = ["aaaa", "aaa"]))
+
