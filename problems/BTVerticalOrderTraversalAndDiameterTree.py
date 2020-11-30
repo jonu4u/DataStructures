@@ -86,7 +86,6 @@ class Solution(object):
             min_val+=1
         return out_list
 
-
     def bfs(self,root):
             q=deque()
             col_index=0
