@@ -25,7 +25,9 @@
 # wordDictionary.search("bad"); // return True
 # wordDictionary.search(".ad"); // return True
 # wordDictionary.search("b.."); // return True
-import re
+
+
+# THIS PROBLEM HAS CLUES TO OTHER PROBLEMS, THIS IS VERY IMP
 class WordDictionary(object):
 
     def __init__(self):
@@ -91,8 +93,6 @@ class WordDictionary(object):
 obj = WordDictionary()
 obj.addWord("")
 param_2 = obj.search("")
-
-print(re.search("bad.","bad").group())
 
 
 
