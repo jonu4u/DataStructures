@@ -51,6 +51,7 @@ class WordDictionary(object):
         curr["*"]="*"
 
 
+
     # If the words were concrete the search is much easier,
     # but since word has . at each level we have to traverse at all possible
     # cases. This leads to Time complexity of O(N.26^M) for undefined word.
