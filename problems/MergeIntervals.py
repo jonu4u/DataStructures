@@ -22,14 +22,12 @@
 # Check this out another variation for facebook
 # https://leetcode.com/problems/merge-intervals/solution/
 class Solution(object):
-    def sort_func(self,list):
-        return list[0]
 
     def merge(self, intervals):
         size=len(intervals)
 
         list1=[]
-        sorted_intervals=sorted(intervals,key=self.sort_func)
+        sorted_intervals=sorted(intervals,key=lambda item:item[0])
         merged=[sorted_intervals[0]]
         for index,elem in enumerate(sorted_intervals):
             if index+1<size:

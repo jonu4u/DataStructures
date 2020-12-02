@@ -20,23 +20,6 @@
 # num1 and num2 consist of digits only.
 # Both num1 and num2 do not contain any leading zero, except the number 0 itself.
 class Solution(object):
-    # This will cause time limit exceed
-    def multiply_brute(self, num1, num2):
-        if num1=="0" or num2=="0":
-            return "0"
-        int1=None
-        int2=None
-        i=0
-        while i>-1:
-            if str(i) == num1:
-                int1=i
-            if str(i) == num2:
-                int2=i
-            if int1 is not None and int2 is not  None:
-                break
-            i+=1
-        return str(int1*int2)
-
     def multiply_smart(self, num1, num2):
         if num1=="0" or num2=="0":
             return "0"
@@ -59,7 +42,6 @@ class Solution(object):
 
 
 s=Solution()
-print(s.multiply_brute("2", "3"))
 print(s.create_int_from_string("987654321"))
 print(s.multiply_smart("123456789", "987654321"))
 
