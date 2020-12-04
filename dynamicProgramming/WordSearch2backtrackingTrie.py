@@ -30,6 +30,8 @@
 # words[i] consists of lowercase English letters.
 # All the strings of words are unique.
 
+# For Practice do word_search
+# https://leetcode.com/problems/word-search/
 class Solution(object):
 
     def findWords(self, board, words):
