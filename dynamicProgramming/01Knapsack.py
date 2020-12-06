@@ -27,22 +27,23 @@ class Knapsack01:
         if wt_arr[size-1]<=target_weight:
             # We can take this element for value calculation.Whether we take it or not
             # we need to reduce the size of the array
-            self.memo[target_weight][size]= max(val_arr[size-1]+self.recursive(wt_arr,val_arr,target_weight-wt_arr[size-1],size-1),
-                       self.recursive(wt_arr,val_arr,target_weight,size-1))
+            self.memo[target_weight][size]= max(val_arr[size-1]+self.recursive_memo(wt_arr,val_arr,target_weight-wt_arr[size-1],size-1),
+                       self.recursive_memo(wt_arr,val_arr,target_weight,size-1))
             return self.memo[target_weight][size]
-        self.memo[target_weight][size]=self.recursive(wt_arr,val_arr,target_weight,size-1)
+        self.memo[target_weight][size]=self.recursive_memo(wt_arr,val_arr,target_weight,size-1)
         return self.memo[target_weight][size]
 
+    # This is the correct one
     def tabulation_bottom_up(self,wt_arr,val_arr,target_weight,size):
-        memo=[[0 for i in range(size+1)]for i in range(target_weight+1)]
-        for row in range(1,target_weight+1):
-            for col in range(1,size+1):
-                if wt_arr[col-1]<=target_weight:
-                    memo[row][col]= max(val_arr[col-1]+memo[target_weight-wt_arr[col-1]][col-1],
-                                        memo[target_weight][col-1])
+        memo=[[0 for i in range(target_weight+1)]for i in range(size+1)]
+        for row in range(1,size+1):
+            for col in range(1,target_weight+1):
+                if wt_arr[row-1]<=col:
+                    memo[row][col]= max(val_arr[row-1]+memo[row-1][col-wt_arr[row-1]],
+                                        memo[row-1][col])
                 else:
-                    memo[row][col]= memo[target_weight][col-1]
-        return memo[target_weight][size]
+                    memo[row][col]= memo[row-1][col]
+        return memo[size][target_weight]
 
     # Print weights as well as profit
     def tabulation_bottom_up_variation_print_weights(self,wt_arr,val_arr,target_weight,size):
