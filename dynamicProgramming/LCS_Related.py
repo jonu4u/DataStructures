@@ -75,7 +75,7 @@ class LCS:
         # from 2nd string -lcs number of insertions
         return (size1-len(lcs))+(size2-len(lcs))
 
-    # 72. Edit Distance !!!!IMP 
+    # 72. Edit Distance !!!!IMP
     #
     # Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.
     #
