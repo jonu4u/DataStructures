@@ -1,3 +1,4 @@
+# Minimum spanning tree includes all vertices
 class Graph:
     def __init__(self):
         self.parentMap={}
