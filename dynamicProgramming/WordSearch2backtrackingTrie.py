@@ -105,6 +105,89 @@ class Solution(object):
             node["*"]=word
         return trie
 
+# 79. Word Search
+#
+# Given an m x n board and a word, find if the word exists in the grid.
+#
+# The word can be constructed from letters of sequentially adjacent cells, where "adjacent" cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.
+#
+#
+#
+# Example 1:
+#
+#
+# Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
+# Output: true
+# Example 2:
+#
+#
+# Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"
+# Output: true
+# Example 3:
+#
+#
+# Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCB"
+# Output: false
+#
+#
+# Constraints:
+#
+# m == board.length
+# n = board[i].length
+# 1 <= m, n <= 200
+# 1 <= word.length <= 103
+# board and word consists only of lowercase and uppercase English letters.
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        # We iterate thru the grid,
+        # whenever we find 1st matching letter
+        # we trigger dfs with backtracking
+        row_len=len(board)
+        col_len=len(board[0])
+        for row in range(row_len):
+            for col in range(col_len):
+                # When we find first matching char we start backtracking
+                if board[row][col]==word[0]:
+
+
+
+                    def backtrack(row,col,is_visited,new_str):
+                        # If the new string ==word we found match return true
+                        if new_str==word:
+                            return True
+                        # If new string and word upto length
+                        # of new string doesn' match we backtrack as that is
+                        # wrong path'
+                        if new_str!=word[:len(new_str)]:
+                            return False
+                        # We look in 4 directions for DFS
+                        for i,j in [(row+1,col),(row-1,col),(row,col+1),(row,col-1)]:
+                            if i>-1 and j>-1 and i<row_len and j<col_len:
+                                # If the cell is not visited
+                                if (i,j) not in is_visited:
+                                    # Mark current cell as visited
+                                    is_visited.add((i,j))
+                                    # We add one char to newStr and call backtrack
+                                    is_found=backtrack(i,j,is_visited,new_str+board[i][j])
+                                    # If we have found a right path we go out
+                                    if is_found:
+                                        return True
+                                    # Else we mark current cell as not visited and continue our search
+                                    is_visited.remove((i,j))
+                        return False
+
+
+                    # We call the backtrack with current cell and if it returns True
+                    # we return True
+                    is_match=backtrack(row,col,{(row,col)},word[0])
+                    if is_match:
+                        return True
+        return False
+
 
 
 
