@@ -8,6 +8,7 @@ class Graph:
     def __init__(self):
         self.vertices={}
         self.head=None
+        self.matrix=[]
 
     def add_vertex(self,vertex_value):
         vertex=Node(vertex_value)
@@ -58,6 +59,16 @@ class Graph:
                 for neighbour in self.vertices.get(current.value).neighbors :
                     stack=[neighbour]+stack
         return out_list
+
+
+    def dfs_matrix(self):
+        return
+
+
+    def bfs_matrix(self):
+        return
+
+
 
 
 

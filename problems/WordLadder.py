@@ -148,6 +148,49 @@ class Solution(object):
         # If the transformation is not possible return 0
         return 0
 
+    def ladderLengthII_smart(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        if beginWord==endWord or endWord not in wordList or len(wordList)==0:
+            return 0
+        # We take a default dict with list as value
+        all_word_dict=defaultdict(list)
+        word_len=len(beginWord)
+
+        # MAIN TRICK , we create words in the dict like
+        # h*t,*it,hi*  so basically we create a list of generic pattern
+        # with one charecter change for each word and put the pateern as key and all words in that pattern as values.
+        # Eg: {h*t:[hit,hot]} and so on
+        for word in wordList:
+            for i in range(word_len):
+                all_word_dict[word[:i]+"*"+word[i+1:]].append(word)
+        # Now for BFS we create q. Add the begin word as level 1
+        q=deque()
+        q.append((beginWord,1))
+        is_visited=set()
+        is_visited.add(beginWord)
+        while q:
+            current_word,level=q.popleft()
+
+            for i in range(word_len):
+                # For each charecter we match the generic pattern from the dict
+                for word in all_word_dict[current_word[:i]+"*"+current_word[i+1:]]:
+                    if word in is_visited:
+                        continue
+                    # If the current word matches the end word we return level+1
+                    if word==endWord:
+                        return level+1
+                    # If we come here, means word is not visited and
+                    # so we append this word to q and increase level by 1 as all these words are in next level
+                    q.append((word,level+1))
+                    is_visited.add(word)
+        # If the transformation is not possible return 0
+        return 0
+
 
 
 
