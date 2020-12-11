@@ -84,7 +84,7 @@ class Solution(object):
         return -1.0 if ans==float('inf') else ans
 
     # Try this out using UNION FIND
-    
+
 
 s=Solution()
 print(s.calcEquation([["a","b"],["b","c"]],
