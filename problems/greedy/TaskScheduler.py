@@ -47,28 +47,18 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        ctr=0
-        task_map=Counter(tasks)
-        # WE SET A TIMER MAP
-        cpu_counter_map={key:0 for key,val in sorted(task_map.items(),key=lambda item:item[1])}
-
-        while True:
-            min_key,min_val="",float('inf')
-            for key,value in cpu_counter_map.items():
-                if value<min_val:
-                    min_val=value
-                    min_key=key
-            ctr+=1
-            if ctr>=min_val:
-                task_map[min_key]-=1
-                if task_map[min_key]==0:
-                    task_map.pop(min_key)
-                    cpu_counter_map.pop(min_key)
-                else:
-                    cpu_counter_map[min_key]=ctr+n
-
-            if not task_map:
-                return ctr
+        # We find the frequency of tasks
+        char_map=Counter(tasks)
+        # We then sort the values
+        value_list=sorted([value for key,value in char_map.items()],reverse=True)
+        # We get the max value
+        max_freq=value_list[0]
+        # We also count how many max_values are there
+        number_of_max_freq=value_list.count(max_freq)
+        # Now the formula is (max_freq-1)*(number of group=n+1)+ number of max freqs
+        # https://www.youtube.com/watch?v=Z2Plc8o1ld4
+        # Sometimes this will be less than number of tasks so we take max of length and ths formula
+        return max(len(tasks),((max_freq-1)*(n+1)+number_of_max_freq))
 s=Solution()
-# print(s.leastInterval(["A","A","A","B","B","B"],2))
+print(s.leastInterval(["A","A","A","B","B","B"],2))
 print(s.leastInterval(["A","A","A","A","A","A","B","C","D","E","F","G"], n = 2))
