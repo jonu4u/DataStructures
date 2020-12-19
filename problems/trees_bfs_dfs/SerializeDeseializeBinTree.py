@@ -36,7 +36,7 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        return self.serialize(root)
+        return self.serialize_preorder(root)
 
 
     def deserialize(self, data):
