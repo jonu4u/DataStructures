@@ -20,14 +20,11 @@
 #
 # 1 <= s.length, t.length <= 105
 # s and t consist of English letters.
-from collections import Counter
 class Solution(object):
     def minWindow_naive(self, s, t):
         if len(t)>len(s):
             return ""
-        # Counter returns a map of chars and their occurences from a string,
-        # but counter is not efficient
-        # actual_map=Counter(t)
+
         actual_map={}
         for char in t:
             actual_map[char]=actual_map.get(char,0)+1
@@ -74,7 +71,7 @@ class Solution(object):
         # Counter returns a map of chars and their occurences from a string,
         # but counter is not efficient
         # actual_map=Counter(t)
-        actual_map={}
+        actual_map=dict()
         for char in t:
             actual_map[char]=actual_map.get(char,0)+1
         actual_distinct_charecters_in_substring=len(actual_map)
@@ -83,7 +80,7 @@ class Solution(object):
         window_map={}
         is_substring_in_string=False
         # tuple of left pointer,right pointer,size of window
-        min_window=(0,0,99999999999)
+        min_window=(0,0,float('inf'))
         while right<len(s):
             charecter=s[right]
             # We add each charecter to the window_map and if exists increase the counter

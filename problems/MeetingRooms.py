@@ -42,7 +42,8 @@ class Solution(object):
                 last=value_list[sz-1]
 
                 # We check whether the current element is on range of previous,
-                # if no then we continue as we need a new room
+                # if yes then we continue as we need a new room.
+                # So start between last or end between last
                 if (start>=last[0] and start<last[1]) or (end<=last[1] and end>last[0]):
                         continue
                 # When a room is found we break

@@ -23,10 +23,11 @@ class Solution(object):
         """
         szA=len(A)
         szB=len(B)
+        # We take two pointers in two lists, so that whenever the elements are within the rangeof each other we get an intersection
         l1,l2=0,0
         out=[]
         while l1<szA and l2<szB:
-            # This is case when there is no intersection
+            # This is case when there is no intersection so begining of 1st element is > ending of second, so we increase te pointer of second list
             if A[l1][0]>B[l2][1]:
                 l2+=1
                 continue
@@ -34,6 +35,8 @@ class Solution(object):
                 l1+=1
                 continue
             out.append(self.find_intersection(A[l1],B[l2]))
+            # If the ending range of one element is more than the other we move to the next elemnt of the other list to see if there is an intersection
+            # of the current wth the next element
             if A[l1][1]>B[l2][1]:
                 l2+=1
             elif B[l2][1]>A[l1][1]:
