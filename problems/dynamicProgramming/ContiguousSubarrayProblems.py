@@ -16,11 +16,15 @@ class Kadane:
 # max_ending_here = 0
 # return max_so_far
     def contiguous_max_sum(self,arr):
-         max_sum=curr=arr[0]
-         for i in range(1,len(arr)):
-             curr=max(arr[i],curr+arr[i])
-             max_sum=max(curr,max_sum)
-         return max_sum
+         max_so_far=float('-inf')
+         max_ending_here=0
+         for elem in arr:
+             max_ending_here+=elem
+             if max_ending_here<elem:
+                 max_ending_here=elem
+             if max_so_far<max_ending_here:
+                 max_so_far=max_ending_here
+         return max_so_far
 
     #     152. Maximum Product Subarray
     # Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
