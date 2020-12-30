@@ -29,7 +29,7 @@ class Solution(object):
         size=len(nums)
         left=0
         counter=0
-        while left<size-1:
+        while left<size:
             right=left+1
             sum=nums[left]
             if sum==k:
@@ -40,8 +40,6 @@ class Solution(object):
                     counter+=1
                 right+=1
             left+=1
-        if nums[size-1]==k:
-            counter+=1
         return counter
 
     # Take cumulate sum and at each step remove the preceeding elements and check if

@@ -29,7 +29,6 @@ class Solution(object):
         """
         graph=defaultdict(list)
         # Taking begin point into consideration
-        journey=len(tickets)+1
         for ticket in tickets:
             departure=ticket[0]
             arrival=ticket[1]
