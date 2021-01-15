@@ -19,8 +19,9 @@ class ListNode(object):
         self.val = val
         self.next = next
 # This solution requires modification IN PLACE in the same list
+from collections import deque
 class Solution(object):
-    def reorderList(self, head):
+    def reorderList_naive(self, head):
         if head is None:
             return head
         index=0
@@ -47,6 +48,39 @@ class Solution(object):
               # Move counter to left and right by one place
               first+=1
               last-=1
+    # Using deque and popping alternativel from left and right
+
+        def reorderList_fast(self, head):
+            if not head or head.next is None:
+                return
+            # The deque is populated starting from 2nd element, the head will anyways be the first
+            q=deque()
+            current=head.next
+            while current:
+                q.append(current)
+                current=current.next
+
+            # Now traverse the deque and pop from left and right alternatively to get given solution
+            index=0
+            prev=head
+            next=q.pop()
+            while next:
+                prev.next=next
+                prev=next
+                if len(q)==0:
+                    prev.next=None
+                    break
+                index+=1
+                next= q.popleft() if index%2==0 else q.pop()
+            return
+
+
+
+
+
+
+
+
 
 s=Solution()
 l1=ListNode(1)

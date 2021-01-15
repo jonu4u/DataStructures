@@ -68,7 +68,7 @@ class Solution(object):
         stack.append(root)
         out_list=[]
         is_visited=set()
-        while len(stack)>0:
+        while stack:
             current=stack.pop(0)
             if current not in is_visited:
                 is_visited.add(current)
