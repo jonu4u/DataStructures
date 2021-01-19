@@ -69,69 +69,7 @@
 # # (row, col) are unique for each different call to move.
 # # At most n2 calls will be made to move.
 from collections import defaultdict
-# class TicTacToe(object):
-#
-#     def __init__(self, n):
-#         """
-#         Initialize your data structure here.
-#         :type n: int
-#         """
-#         # We create a map of map for each row and each column and two diagonals
-#         self.row_map=defaultdict(dict)
-#         self.col_map=defaultdict(dict)
-#         self.diag_map_top={}
-#         for row in range(n):
-#             for col in range(n):
-#                 self.row_map[row][(row,col)]=-1
-#                 self.col_map[col][(row,col)]=-1
-#                 if row==col:
-#                     self.diag_map_top[(row,col)]=-1
-#         self.diag_map_bottom={}
-#         for i in range(n):
-#             self.diag_map_bottom[(n-i-1,i)]=-1
-#
-#
-#     # Aim is to write move in less than O(n2) time
-#     def move(self, row, col, player):
-#         """
-#         Player {player} makes a move at ({row}, {col}).
-#         @param row The row of the board.
-#         @param col The column of the board.
-#         @param player The player, can be either 1 or 2.
-#         @return The current winning condition, can be either:
-#                 0: No one wins.
-#                 1: Player 1 wins.
-#                 2: Player 2 wins.
-#         :type row: int
-#         :type col: int
-#         :type player: int
-#         :rtype: int
-#         """
-#         def check_winner(map,player):
-#             for value in map.values():
-#                 if value!=player:
-#                     return False
-#             return True
-#         # When we do a move we check for its diagonal,row,col if all have same values.If yes we have a winner
-#         self.row_map[row][(row,col)]=player
-#         is_winner=check_winner(self.row_map[row],player)
-#         if is_winner:
-#             return player
-#         self.col_map[col][(row,col)]=player
-#         is_winner=check_winner(self.col_map[col],player)
-#         if is_winner:
-#             return player
-#         if (row,col) in self.diag_map_top:
-#             self.diag_map_top[(row,col)]=player
-#             is_winner=check_winner(self.diag_map_top,player)
-#             if is_winner:
-#                 return player
-#         if (row,col) in self.diag_map_bottom:
-#             self.diag_map_bottom[(row,col)]=player
-#             is_winner=check_winner(self.diag_map_bottom,player)
-#             if is_winner:
-#                 return player
-#         return 0
+
 class TicTacToe(object):
 
     def __init__(self, n):
