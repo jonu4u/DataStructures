@@ -72,12 +72,9 @@ class Solution(object):
 
 
 s=Solution()
-print(s.subarraySum_naive([1,1,1],2))
-print(s.subarraySum_naive([1,-1,0],0))
-print(s.subarraySum_naive([28,54,7,-70,22,65,-6],100))
-print("-----------")
-print(s.subarraySum_hashmap([1,1,1],2))
-print(s.subarraySum_hashmap([1,-1,0],0))
-print(s.subarraySum_hashmap([28,54,7,-70,22,65,-6],100))
+print(s.numSubarrayProductLessThanK_sliding([1,1,1],2))
+print(s.numSubarrayProductLessThanK_sliding([1,-1,0],0))
+print(s.numSubarrayProductLessThanK_sliding([28,54,7,-70,22,65,-6],100))
+
 
 

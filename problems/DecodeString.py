@@ -127,24 +127,11 @@ class Solution(object):
         return out
 
 
-
-
-
-s=Solution()
-print(s.decodeString("3[z]2[2[y]pq4[2[jk]e1[f]]]ef"))
-# 'zzzyypqjkjkefjkjkefjkjkefjkjkefyypqjkjkefjkjkefjkjkefjkjkefef'
-print(s.decodeString("3[a]2[bc]"))
-print(s.decodeString("2[abc]3[cd]ef"))
-print(s.decodeString("abc3[cd]xyz"))
-print(s.decodeString("3[a2[c]]"))
-print(s.decodeString("100[leetcode]"))
-
-
-
-
-
-
-
-
-
-
+# s=Solution()
+# print(s.decodeString("3[z]2[2[y]pq4[2[jk]e1[f]]]ef"))
+# # 'zzzyypqjkjkefjkjkefjkjkefjkjkefyypqjkjkefjkjkefjkjkefjkjkefef'
+# print(s.decodeString("3[a]2[bc]"))
+# print(s.decodeString("2[abc]3[cd]ef"))
+# print(s.decodeString("abc3[cd]xyz"))
+# print(s.decodeString("3[a2[c]]"))
+# print(s.decodeString("100[leetcode]"))
