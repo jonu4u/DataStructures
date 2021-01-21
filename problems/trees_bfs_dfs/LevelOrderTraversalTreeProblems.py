@@ -22,52 +22,41 @@ from collections import deque
 #         self.left = left
 #         self.right = right
 class LevelOrderNormal(object):
-    def levelOrder(self, root):
+    def zigzagLevelOrder(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        output={}
-        if root is None:
-            return output
-        q=deque([root])
-        # peek returns first element from q.So till q is not null
-        while len(q)>0 and q[0] is not None:
-            element_peeked=q.popleft()
-            height=self.height_of_node(root,element_peeked)
-            if output.get(height) is not None:
-                output.get(height).append(element_peeked.val)
+        if not root:
+            return []
+        q=deque()
+        q.append(root)
+        q.append(None)
+        out=[]
+        ctr=0
+        inner=[]
+        while q:
+            curr=q.popleft()
+            if not curr and len(q)==0:
+                out.append(inner[:])
+                break
+            elif not curr:
+                q.append(None)
+                out.append(inner[:])
+                inner=[]
+                ctr+=1
+                continue
+            if ctr%2==0:
+                inner.append(curr.val)
             else:
-                output[height]=[element_peeked.val]
-            # left=left of element peeked and right is right
-            left=element_peeked.left
-            right=element_peeked.right
-            # if not none then put in q and loop
-            if left is not None:
-                q.append(left)
-            if right is not None:
-                q.append(right)
-        return output.values()
+                inner.insert(0,curr.val)
 
-    def __getHeight__(self,root, node, level):
-        if (root == None):
-            return 0
+            if curr.left:
+                q.append(curr.left)
+            if curr.right:
+                q.append(curr.right)
 
-        if (root == node) :
-            return level
-
-        downlevel = self.__getHeight__(root.left,
-                                       node, level + 1)
-        if (downlevel != 0) :
-            return downlevel
-
-        downlevel = self.__getHeight__(root.right,
-                                       node, level + 1)
-        return downlevel
-
-
-    def height_of_node(self,root, data) :
-        return self.__getHeight__(root, data, 1)
+        return out
 
 # 107. Binary Tree Level Order Traversal II
 # Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
