@@ -45,38 +45,31 @@ class Node(object):
         self.val = val
         self.children = children if children is not None else []
 
-from collections import deque
 class Solution(object):
     def __init__(self):
-        self.ans=0
-        self.sum=0
-        # self.node_length=float('-inf')
+        self.dia=0
     def diameter(self, root):
         """
         :type root: 'Node'
         :rtype: int
         """
-        if not root:
-            return 0
-        self.ans=float('-inf')
-        self.dfs(root)
-        return self.ans
-
-    def dfs(self,root):
-        if not root: return 0
-        q=deque()
-        for child in root.children:
-            q.append(self.dfs(child))
-            if len(q)>2:
-                q.popleft()
-
-        l1,l2=0,0
-        if len(q)>0:
-            l1=q.popleft()
-        if len(q)>0:
-            l2=q.popleft()
-        self.ans=max(self.ans,l1+l2)
-        return max(l1,l2)+1
+        def max_depth(node,curr_depth):
+            # If no child we return the current depth as max depth
+            if not node.children: return curr_depth
+            # We define the top 2 height as current depth and 0
+            max_dep_1,max_dep_2=curr_depth,0
+            for children in node.children:
+                depth=max_depth(children,curr_depth+1)
+                # if this depth >max_1 then we swap this to max and prev max to max 2
+                if depth>max_dep_1:
+                    max_dep_1,max_dep_2=depth,max_dep_1
+                elif depth>max_dep_2:
+                    max_dep_2=depth
+            distance=max_dep_1+max_dep_2-2*curr_depth
+            self.dia=max(self.dia,distance)
+            return max_dep_1
+        max_depth(root,0)
+        return self.dia
 
 s=Solution()
 n1=Node(1,[])
