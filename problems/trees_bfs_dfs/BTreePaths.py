@@ -45,14 +45,14 @@ class Solution(object):
             size=len(list2)
             list2.pop(size-1)
             return list1
-        # if we have only right child, we traverse on the left child
+        # if we have only right child, we traverse on the right child
         if not root.left:
             self.traversal(root.right,list1,list2)
             # once we traverse it we remove the last element from inner list
             size=len(list2)
             list2.pop(size-1)
             return list1
-        # if we have only left child, we traverse on the right child
+        # if we have only left child, we traverse on the left child
         if not root.right:
             self.traversal(root.left,list1,list2)
             size=len(list2)
@@ -75,6 +75,7 @@ class Solution(object):
             sum=sum+"->"+str(list1[index])
             index+=1
         return sum
+
 
 s=Solution()
 n1=TreeNode(1)

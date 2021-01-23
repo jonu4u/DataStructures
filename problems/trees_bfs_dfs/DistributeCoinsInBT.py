@@ -54,7 +54,7 @@ class Solution(object):
 
     def dfs(self,root,ctr):
         if not root:return ctr
-        # take the return value of ctr as ctr is midifiedinside recursion
+        # take the return value of ctr as ctr is modified inside recursion
         # If it was a list the list already contained elements from inside but for intwe have to return value
         ctr=self.dfs(root.left,ctr)
         ctr=self.dfs(root.right,ctr)
